@@ -1,0 +1,62 @@
+modules = ["python-3.11", "nodejs-20", "python3"]
+
+[nix]
+channel = "stable-24_05"
+packages = ["ffmpeg-full", "libxcrypt"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "business_analysis_system"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Next.js Frontend"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Python API Backend"
+
+[[workflows.workflow]]
+name = "business_analysis_system"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install crewai crewai-tools python-dotenv pydantic jira streamlit"
+
+[[workflows.workflow]]
+name = "Next.js Frontend"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "Python API Backend"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python api_backend.py"
+waitForPort = 8000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 8000
+externalPort = 8000
+
+[deployment]
+deploymentTarget = "cloudrun"

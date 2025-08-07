@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "crewai-orchestrator"
+version = "0.1.0"
+description = "CrewAI Orchestrator - A tool for managing AI agents"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+packages = [{ include = "crewai_orchestrator", from = "src" }]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<=3.13.2"
+crewai = "^0.148.0"
+crewai-tools = "^0.55.0"
+flask = "^3.1.1"
+flask-cors = "^6.0.1"
+jira = "^3.8.0"
+pydantic = "^2.11.7"
+python-dateutil = "^2.9.0"
+python-dotenv = "^1.1.1"
+requests = "^2.32.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
